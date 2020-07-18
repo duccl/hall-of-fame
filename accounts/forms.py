@@ -6,6 +6,13 @@ from .models import UserProfile
 class CustomUserCretionForm(UserCreationForm):
     profile_pic = forms.ImageField()
     about = forms.CharField()
-
     class Meta():
         model = User
+
+    def save(self, commit=True):
+        user = super(CustomUserCretionForm,self).save()
+        user_profile = UserProfile(user=user,image=self.cleaned_data['profile_pic'])
+        if self.cleaned_data.get('about'):
+            user_profile.about = self.cleaned_data.get('about')
+        user_profile.save()
+        return user,user_profile
