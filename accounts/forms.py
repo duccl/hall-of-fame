@@ -4,10 +4,8 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 
 class CustomUserCretionForm(UserCreationForm):
-    profile_pic = forms.ImageField()
-    about = forms.CharField()
-    class Meta():
-        model = User
+    profile_pic = forms.ImageField(required=False)
+    about = forms.CharField(required=False)
 
     def save(self, commit=True):
         user = super(CustomUserCretionForm,self).save()

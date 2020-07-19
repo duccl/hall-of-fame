@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login
 
 class SignUpView(CreateView):
     form_class = CustomUserCretionForm
-
+    template_name = 'accounts/signup.html'
     def get_success_url(self):
         user = authenticate(self.request,username=self.request.POST.get('username'),password=self.request.POST.get('password1'))
         login(self.request,user=user)
