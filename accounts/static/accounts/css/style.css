@@ -12,8 +12,15 @@ body {
   color: white;
 }
 
-#signUpFormContainer {
+.roboto {
   font-family: 'Roboto',sans-serif;
+}
+
+.color-white {
+  color: white;
+}
+
+.margin-top-md {
   margin-top: 3em;
 }
 

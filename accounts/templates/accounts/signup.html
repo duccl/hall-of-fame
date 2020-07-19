@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 {% load bootstrap4 %}
 {% block content_section %}
-<div class="container" id="signUpFormContainer">
+<div class="container margin-top-md roboto" id="signUpFormContainer">
     <form enctype="multipart/form-data" method="post">
         {%csrf_token%}
         {% bootstrap_form form %}
