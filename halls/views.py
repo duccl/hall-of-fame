@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -26,3 +26,9 @@ class HallsView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "All Halls"
         return context
+
+class HallDetailView(DetailView):
+    model = Hall
+    template_name = "halls/detail_hall.html"
+    slug_url_kwarg = 'hall_id'
+    slug_field = 'id'
