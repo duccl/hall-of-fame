@@ -10,6 +10,7 @@ class CustomUserCretionForm(UserCreationForm):
     def save(self, commit=True):
         user = super(CustomUserCretionForm,self).save()
         user_profile = UserProfile(user=user,image=self.cleaned_data['profile_pic'])
+        print(user_profile.image,self.cleaned_data['profile_pic'],self.cleaned_data)
         if self.cleaned_data.get('about'):
             user_profile.about = self.cleaned_data.get('about')
         user_profile.save()

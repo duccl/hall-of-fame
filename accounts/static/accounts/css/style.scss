@@ -1,0 +1,23 @@
+*,body{
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0F0A1E;
+}
+
+#signUpFormContainer form label{
+    color: white;
+}
+
+#signUpFormContainer{
+    font-family: 'Roboto',sans-serif;
+    margin-top: 3em;
+    ul{
+        list-style-type: none;
+    }
+    input[type="file"]{
+        color: white;
+    }
+}

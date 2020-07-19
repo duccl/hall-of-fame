@@ -1,8 +1,8 @@
 {% extends './base.html' %}
 {% load bootstrap4 %}
 {% block content_section %}
-<div class="container">
-    <form method="post">
+<div class="container" id="signUpFormContainer">
+    <form enctype="multipart/form-data" method="post">
         {%csrf_token%}
         {% bootstrap_form form %}
         <input type="submit" class="btn btn-primary" value="Sign Up">
