@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+
+{% block content_section%}
+<div class="container roboto margin-top color-white">
+    <h1>Halls of {{username}}</h1>
+    {% if halls %}
+    <div class="list-group">
+        {%for hall in halls%}
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 font-weight-light">{{hall.title}}</h5>
+            </div>
+            <p class="mb-1 font-italic">{{hall.author}}</p>
+            <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
+        </a>
+        {%endfor%}
+    </div>
+    {% endif %}
+</div>
+{%endblock%}
