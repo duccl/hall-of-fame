@@ -1,8 +1,17 @@
 {% extends './base.html' %}
 
 {% block content_section%}
-<div class="container roboto margin-top color-white">
+<div class="container roboto margin-top-md roboto color-white">
     <h1>{{hall.title}}</h1>
     <h2 class='text-muted'>{{hall.author}}</h2>
+
+    {% if user == hall.author %}
+        <a href="{% url 'halls:update_hall' hall_id=hall.id%}" class='btn btn-primary'>
+            Update
+        </a>
+        <a href="{% url 'halls:delete_hall' hall_id=hall.id%}" class='btn btn-danger'>
+            Delete
+        </a>
+    {% endif %}
 </div>
 {%endblock%}

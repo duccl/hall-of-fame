@@ -1,0 +1,11 @@
+{% extends './base.html' %}
+{% block content_section %}
+<div class="container margin-top-md roboto color-white" id="signUpFormContainer">
+    <h2>Do you really want to delete {{hall.title}}?</h2>
+    <form method="post">
+        {%csrf_token%}
+        <input type="submit" class="btn btn-primary" value="Delete">
+        <a href="{% url 'halls:hall' hall_id=hall.id%}" class='btn btn-danger'>Cancel</a>
+    </form>
+</div>
+{% endblock %}

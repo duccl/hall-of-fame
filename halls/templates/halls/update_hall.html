@@ -1,0 +1,13 @@
+{% extends './base.html' %}
+{% load bootstrap4 %}
+{% block content_section %}
+<div class="container margin-top-md roboto" id="signUpFormContainer">
+    <h2>Updating Hall</h2>
+    <form method="post">
+        {%csrf_token%}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a href="{% url 'halls:hall' hall_id=hall.id%}" class='btn btn-danger'>Cancel</a>
+    </form>
+</div>
+{% endblock %}
