@@ -17,4 +17,4 @@ class SignUpView(CreateView):
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
-    #success_url = reverse_lazy('halls:home')
+    success_url = reverse_lazy('halls:home')
