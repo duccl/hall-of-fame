@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-
 login_url = 'accounts:login'
 
 class DashBoardView(LoginRequiredMixin,ListView):
@@ -70,3 +69,21 @@ class HallDeleteView(LoginRequiredMixin,DeleteView):
 
     def get_success_url(self):
         return reverse('halls:home')
+
+class HallUpdateVideosView(LoginRequiredMixin,CreateView):
+    model = Video
+    template_name = "halls/update_hall_videos.html"
+    login_url = login_url
+    fields = ('title',)
+    
+    def form_valid(self, form):
+        video = form.save(commit=False)
+        video.save(hall_id = self.kwargs.get('hall_id'))
+        return HttpResponseRedirect(reverse('halls:hall',kwargs={'hall_id':self.kwargs.get('hall_id')}))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["hall_id"] = self.kwargs.get('hall_id')
+        context["hall_name"] = get_object_or_404(Hall,pk=self.kwargs.get('hall_id')).title
+        return context
+    
