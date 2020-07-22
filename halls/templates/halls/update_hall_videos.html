@@ -12,11 +12,9 @@
     <hr>
     <div class="container">
         <h2>OR</h2>
-        {% for search_form in search_forms %}
-            <form>
-                {% bootstrap_form search_form %}
-            </form>
-        {% endfor %}
+        <form>
+            {% bootstrap_form search_form %}
+        </form>
     </div>
 </div>
 {% endblock %}

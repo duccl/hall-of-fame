@@ -71,27 +71,25 @@ class HallDeleteView(LoginRequiredMixin,DeleteView):
     def get_success_url(self):
         return reverse('halls:home')
 
-class HallUpdateVideosView(LoginRequiredMixin,CreateView):
+class CreateVideoView(LoginRequiredMixin,CreateView):
     model = Video
-    template_name = "halls/update_hall_videos.html"
+    template_name = "halls/create_video.html"
     login_url = login_url
-    fields = ('title',)
+    fields = ('url',)
 
     def __init__(self):
-        self.search_formset = SearchVideoFormSet
+        self.search_form = SearchVideoForm()
         super().__init__()
 
     def form_valid(self, form):
-        videos = form.save(commit=False)
-        for video in videos:
-            video = form.save(commit=False)
-            video.save(hall_id = self.kwargs.get('hall_id'))
+        video = form.save(commit=False)
+        video.save(hall_id = self.kwargs.get('hall_id'))
         return HttpResponseRedirect(reverse('halls:hall',kwargs={'hall_id':self.kwargs.get('hall_id')}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["hall_id"] = self.kwargs.get('hall_id')
         context["hall_name"] = get_object_or_404(Hall,pk=self.kwargs.get('hall_id')).title
-        context['search_forms'] = self.search_formset
+        context['search_form'] = self.search_form
         return context
     
