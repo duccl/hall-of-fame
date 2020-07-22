@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from .forms import *
 login_url = 'accounts:login'
 
 class DashBoardView(LoginRequiredMixin,ListView):
@@ -75,15 +76,22 @@ class HallUpdateVideosView(LoginRequiredMixin,CreateView):
     template_name = "halls/update_hall_videos.html"
     login_url = login_url
     fields = ('title',)
-    
+
+    def __init__(self):
+        self.search_formset = SearchVideoFormSet
+        super().__init__()
+
     def form_valid(self, form):
-        video = form.save(commit=False)
-        video.save(hall_id = self.kwargs.get('hall_id'))
+        videos = form.save(commit=False)
+        for video in videos:
+            video = form.save(commit=False)
+            video.save(hall_id = self.kwargs.get('hall_id'))
         return HttpResponseRedirect(reverse('halls:hall',kwargs={'hall_id':self.kwargs.get('hall_id')}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["hall_id"] = self.kwargs.get('hall_id')
         context["hall_name"] = get_object_or_404(Hall,pk=self.kwargs.get('hall_id')).title
+        context['search_forms'] = self.search_formset
         return context
     

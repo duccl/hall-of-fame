@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 {% load bootstrap4 %}
 {% block content_section %}
-<div class="container margin-top-md roboto" id="signUpFormContainer">
+<div class="container margin-top-md roboto color-white" id="signUpFormContainer">
     <h2>Updating {{hall_name}} Videos</h2>
     <form method="post">
         {%csrf_token%}
@@ -9,5 +9,14 @@
         <input type="submit" class="btn btn-primary" value="Save">
         <a href="{% url 'halls:hall' hall_id=hall_id%}" class='btn btn-danger'>Cancel</a>
     </form>
+    <hr>
+    <div class="container">
+        <h2>OR</h2>
+        {% for search_form in search_forms %}
+            <form>
+                {% bootstrap_form search_form %}
+            </form>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
