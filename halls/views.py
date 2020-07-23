@@ -38,6 +38,12 @@ class HallDetailView(LoginRequiredMixin,DetailView):
     slug_url_kwarg = 'hall_id'
     slug_field = 'id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["videos"] = Video.objects.filter(hall=self.get_object())
+        return context
+    
+
 class HallCreateView(LoginRequiredMixin,CreateView):
     model = Hall
     template_name = "halls/create_hall.html"
