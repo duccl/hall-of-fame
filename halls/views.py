@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import *
-from django.conf import settings
 login_url = 'accounts:login'
 
 class DashBoardView(LoginRequiredMixin,ListView):
