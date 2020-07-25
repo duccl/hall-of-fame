@@ -8,4 +8,5 @@ urlpatterns = [
     path('update_hall/<int:hall_id>/',HallUpdateView.as_view(),name='update_hall'),
     path('delete_hall/<int:hall_id>/',HallDeleteView.as_view(),name='delete_hall'),
     path('<int:hall_id>/addvideo/',CreateVideoView.as_view(),name='add_video'),
+    path('video/search',search_videos,name='video_search'),
 ]

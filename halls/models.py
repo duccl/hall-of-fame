@@ -1,6 +1,5 @@
 from django.db import models
 from urllib.parse import urlparse,parse_qs
-import requests
 from django.conf import settings
 
 class Hall(models.Model):

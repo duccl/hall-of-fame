@@ -6,7 +6,16 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import *
+from .api import Api
 login_url = 'accounts:login'
+
+def search_videos(request):
+    search_form = SearchVideoForm(request.GET)
+    return Api().listVideos(search_form)
+    # if search_form.is_valid():
+    #     search_term = search_form.cleaned_data.get('search_term')
+    #     return JsonResponse({'hello':search_term})
+    # return JsonResponse({'hello':'nonon'})
 
 class DashBoardView(LoginRequiredMixin,ListView):
     template_name = "halls/dashboard.html"
