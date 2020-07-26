@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete_hall/<int:hall_id>/',HallDeleteView.as_view(),name='delete_hall'),
     path('<int:hall_id>/addvideo/',CreateVideoView.as_view(),name='add_video'),
     path('video/search',search_videos,name='video_search'),
+    path('delete_video/<int:video_id>/',VideoDeleteView.as_view(),name='delete_video'),
 ]

@@ -1,6 +1,7 @@
 from django.db import models
 from urllib.parse import urlparse,parse_qs
 from django.conf import settings
+import requests
 
 class Hall(models.Model):
     author = models.ForeignKey('auth.user',on_delete=models.CASCADE)
@@ -16,7 +17,6 @@ class Video(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=200,default='')
     youtube_id = models.CharField(max_length=255)
-
 
     def extract_youtube_id_from_url(self):
         self.youtube_id = parse_qs(urlparse(self.url).query).get('v')[0]

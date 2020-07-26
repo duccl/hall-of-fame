@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404,redirect
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView,RedirectView
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -12,7 +12,7 @@ login_url = 'accounts:login'
 def search_videos(request):
     search_form = SearchVideoForm(request.GET)
     return Api().listVideos(search_form)
-    
+
 class DashBoardView(LoginRequiredMixin,ListView):
     template_name = "halls/dashboard.html"
     login_url = login_url
@@ -103,4 +103,14 @@ class CreateVideoView(LoginRequiredMixin,CreateView):
         context["hall_name"] = get_object_or_404(Hall,pk=self.kwargs.get('hall_id')).title
         context['search_form'] = self.search_form
         return context
+    
+class VideoDeleteView(LoginRequiredMixin,DeleteView):
+    model = Video
+    template_name = "halls/delete_video.html"
+    login_url = login_url
+    slug_url_kwarg = 'video_id'
+    slug_field = 'id'
+
+    def get_success_url(self):
+        return reverse('halls:home')
     

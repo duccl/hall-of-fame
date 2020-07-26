@@ -3,7 +3,7 @@
 {% block content_section %}
 <div class="container margin-top-md roboto color-white" id="signUpFormContainer">
     <h2>Updating {{hall_name}} Videos</h2>
-    <form method="post">
+    <form method="post" id='new_video'>
         {%csrf_token%}
         {% bootstrap_form form %}
         <input type="submit" class="btn btn-primary" value="Save">

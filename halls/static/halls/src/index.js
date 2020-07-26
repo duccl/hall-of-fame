@@ -1,6 +1,7 @@
 let id_display_search = '#search_results'
-const callAPI = async (text, callback) => {
-    await $.ajax({
+let baseURLYoutubeWatchVideo = 'https://www.youtube.com/watch?v='
+const callAPI = (text, callback) => {
+    $.ajax({
         url: '/video/search',
         data: {
             'search_term': text
@@ -8,6 +9,11 @@ const callAPI = async (text, callback) => {
         dataType: 'json'
     })
     .done(callback)
+}
+
+const callAddVideoPost = (event_fired) =>{
+    $('#id_url').val(baseURLYoutubeWatchVideo + event_fired.target.id)
+    $('#new_video').submit()
 }
 
 const build_youtube_iframe = (youtube_id) => {
@@ -57,6 +63,15 @@ const build_card_text = (description) => {
     return description_element
 }
 
+const build_card_add_button = (youtube_id) =>{
+    let button = document.createElement('button')
+    button.setAttribute('class','btn btn-primary')
+    button.innerText = 'Add Video'
+    button.id = youtube_id
+    button.onclick = callAddVideoPost
+    return button;
+}
+
 const build_entire_youtube_video_content_element = (title,description,youtube_id) => {
     let container_div = build_column_container()
     let card_container = build_card_container()
@@ -64,8 +79,10 @@ const build_entire_youtube_video_content_element = (title,description,youtube_id
     let card_body = build_card_body()
     let card_title = build_card_title(title)
     let card_text = build_card_text(description)
+    let card_add_video_button = build_card_add_button(youtube_id)
     card_body.appendChild(card_title)
     card_body.appendChild(card_text)
+    card_body.appendChild(card_add_video_button)
     card_container.appendChild(card_youtube_video)
     card_container.appendChild(card_body)
     container_div.appendChild(card_container)
