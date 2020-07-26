@@ -12,7 +12,7 @@ login_url = 'accounts:login'
 def search_videos(request):
     search_form = SearchVideoForm(request.GET)
     return Api().listVideos(search_form)
-
+    
 class DashBoardView(LoginRequiredMixin,ListView):
     template_name = "halls/dashboard.html"
     login_url = login_url

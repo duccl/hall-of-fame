@@ -4,7 +4,7 @@ from django.conf import settings
 import json
 class Api:
     baseURL = 'https://www.googleapis.com/youtube/v3/'
-    maxResults = '10'
+    maxResults = '5'
     def buildURL(self,typeOfCall,part,options):
         self.url = f'{self.baseURL}{typeOfCall}?key={settings.YOUTUBE_API_KEY}&{part}&{options}'
 
