@@ -13,8 +13,13 @@ class SignUpView(CreateView):
         user = authenticate(self.request,username=self.request.POST.get('username'),password=self.request.POST.get('password1'))
         login(self.request,user=user)
         if self.request.user.is_authenticated:
-            return reverse('halls:dashboard',kwargs={'user_id':user.pk})
+            return reverse('halls:dashboard',kwargs={'username':user.username})
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
-    success_url = reverse_lazy('halls:home')
+
+    def get_success_url(self):
+        return reverse('halls:dashboard',kwargs={'username':self.request.user.username})
+
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('halls:home')

@@ -3,16 +3,23 @@
 {% block content_section%}
 <div class="container roboto margin-top-md color-white">
     {% if halls %}
-    <div class="list-group">
+    <div class='col'>
         {%for hall in halls%}
-        <a href="{% url 'halls:hall' hall_id=hall.id %}" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1 font-weight-light">{{hall.title}}</h5>
-                <small class="mb-1 font-italic">{{hall.author}}</small>
+        <div class="row margin-top-md">
+            <div class="color-white container">
+                <h3 class="mb-1 font-weight-light">{{hall.title}}</h5>
+                <h5 class="mb-1 font-italic">{{hall.author}}</h5>
+                <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
             </div>
-            <p class="font-italic">{{hall.description | safe}}</p>
-            <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
-        </a>
+            <div class="d-flex w-100 justify-content-between">
+                {%for video in hall.video_set.all%}
+                {% include 'partials/video_card.html' %}
+                {% endfor %}
+            </div>
+            <a href="{% url 'halls:hall' hall_id=hall.id %}" class="btn btn-primary margin-top-sm">
+                See Details
+            </a>
+        </div>
         {%endfor%}
     </div>
     {% else %}

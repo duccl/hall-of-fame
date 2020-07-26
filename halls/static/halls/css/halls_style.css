@@ -3,7 +3,21 @@
   margin-right: 2em;
 }
 
-.card{
+.color-black {
   color: black;
+}
+
+.card {
+  color: black;
+}
+
+#new_hall {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.margin-top-sm {
+  margin-top: 0.5em;
 }
 /*# sourceMappingURL=halls_style.css.map */
