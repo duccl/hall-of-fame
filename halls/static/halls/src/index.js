@@ -22,7 +22,8 @@ const build_youtube_iframe = (youtube_id) => {
     iframe.height = '225';
     iframe.src = "https://www.youtube.com/embed/" + youtube_id
     iframe.frameborder="0";
-    iframe.allow="accelerometer";   
+    iframe.allow="accelerometer; encrypted-media; gyroscope; picture-in-picture";   
+    iframe.setAttribute('allowFullScreen','')
     return iframe
 }
 
