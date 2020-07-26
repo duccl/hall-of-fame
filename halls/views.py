@@ -32,6 +32,11 @@ class HallsView(ListView):
     model = Hall
     context_object_name = 'halls'
 
+    def get_queryset(self):
+        return Hall.objects.all().order_by('-creation_date')
+    
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "All Halls"
