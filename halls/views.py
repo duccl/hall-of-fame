@@ -112,5 +112,5 @@ class VideoDeleteView(LoginRequiredMixin,DeleteView):
     slug_field = 'id'
 
     def get_success_url(self):
-        return reverse('halls:home')
+        return reverse('halls:hall',kwargs={'hall_id':self.kwargs.get('hall_id')})
     
