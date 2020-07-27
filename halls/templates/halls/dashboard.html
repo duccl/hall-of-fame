@@ -5,7 +5,7 @@
     <div class="d-flex w-100 justify-content-between">
         <h1>Halls of {{username}}</h1>
         {%if user.is_authenticated and user.username == username %}
-            <a id="new_hall" class="btn btn-primary" href="{% url 'halls:new_hall' %}">Create a New Hall</a>
+        <a id="new_hall" class="btn btn-primary" href="{% url 'halls:new_hall' %}">Create a New Hall</a>
         {% endif %}
     </div>
     {% if halls %}
@@ -14,18 +14,20 @@
         <div class="row margin-top-md">
             <div class="color-white container">
                 <h3 class="mb-1 font-weight-light">{{hall.title}}</h5>
-                <small class="mb-1 font-italic">{{hall.author}}</small>
-                <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
-                <p class="font-italic">{{hall.description | safe}}</p>
+                    <small class="mb-1 font-italic">{{hall.author}}</small>
+                    <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
+                    <p class="font-italic">{{hall.description | safe}}</p>
             </div>
             <div class="d-flex w-100 justify-content-between">
                 {%for video in hall.video_set.all%}
                 {% include 'partials/video_card.html' %}
                 {% endfor %}
             </div>
-            <a href="{% url 'halls:hall' hall_id=hall.id %}" class="btn btn-primary margin-top-sm">
-                See Details
-            </a>
+            <div class="container">
+                <a href="{% url 'halls:hall' hall_id=hall.id %}" class="btn btn-primary margin-top-sm">
+                    See Details
+                </a>
+            </div>
         </div>
         {%endfor%}
     </div>
