@@ -14,17 +14,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'halls:new_hall' %}">New Hall of fame</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{%url 'accounts:logout' %}">Logout</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:login'%}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:sign-up'%}">Sign Up</a>
-            </li>
             {% endif %}
         </ul>
+        <div class="d-flex">
+            {% if not user.is_authenticated %}
+                <a class="btn btn-default color-white margin-right-default" href="{% url 'accounts:login'%}">Login</a>
+                <a class="btn btn-outline-primary my-2 my-sm-0 margin-right-default" href="{% url 'accounts:sign-up'%}">Sign Up</a>
+            {% else %}
+                <a class="btn btn-outline-danger margin-right-default" href="{%url 'accounts:logout' %}">Logout</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
