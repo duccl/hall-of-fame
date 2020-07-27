@@ -5,7 +5,7 @@
     <form method="post">
         {%csrf_token%}
         <input type="submit" class="btn btn-primary" value="Delete">
-        <a href="{% url 'halls:hall' hall_id=video.hall.id%}" class='btn btn-danger'>Cancel</a>
+        <a href="{% url 'halls:hall' hall_id=hall_id%}" class='btn btn-danger'>Cancel</a>
     </form>
 </div>
 {% endblock %}

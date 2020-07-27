@@ -4,7 +4,7 @@ from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,Http404
 from .forms import *
 from .api import Api
 login_url = 'accounts:login'
@@ -34,15 +34,13 @@ class HallsView(ListView):
 
     def get_queryset(self):
         return Hall.objects.all().order_by('-creation_date')
-    
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "All Halls"
         return context
 
-class HallDetailView(LoginRequiredMixin,DetailView):
+class HallDetailView(DetailView):
     model = Hall
     template_name = "halls/detail_hall.html"
     slug_url_kwarg = 'hall_id'
@@ -84,6 +82,12 @@ class HallDeleteView(LoginRequiredMixin,DeleteView):
     slug_url_kwarg = 'hall_id'
     slug_field = 'id'
 
+    def get_object(self, queryset=None):
+        hall = super(HallDeleteView,self).get_object()
+        if self.request.user != hall.author:
+            raise Http404('ERR DELETE YOUR OWN HALL!')
+        return hall
+
     def get_success_url(self):
         return reverse('halls:home')
 
@@ -115,6 +119,18 @@ class VideoDeleteView(LoginRequiredMixin,DeleteView):
     login_url = login_url
     slug_url_kwarg = 'video_id'
     slug_field = 'id'
+
+    def get_object(self, queryset=None):
+        hall = Hall.objects.get(id=self.kwargs.get('hall_id'))
+        if self.request.user != hall.author:
+            raise Http404('ERR DELETE YOUR OWN HALL VIDEOS!')
+        return super().get_object(queryset)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["hall_id"] = self.kwargs.get('hall_id')
+        return context
+    
 
     def get_success_url(self):
         return reverse('halls:hall',kwargs={'hall_id':self.kwargs.get('hall_id')})
