@@ -28,13 +28,13 @@
                     <h5 class="mb-1 font-italic">{{hall.author}}</h5>
                     <small>Created on {{hall.creation_date| date:"d-m-Y h:i"}}</small>
             </div>
-            <div class="d-flex w-100 justify-content-between row">
+            <div class="d-flex w-100 justify-content-between row container">
                 {%for video in hall.video_set.all%}
                 {% include 'partials/video_card.html' %}
                 {% endfor %}
             </div>
             <div class="container margin-top-sm">
-                <a href="{% url 'halls:hall' hall_id=hall.id %}" class="btn btn-primary">
+                <a href="{% url 'halls:hall' hall_id=hall.id %}" class="btn btn-primary margin-top-sm">
                     See Details
                 </a>
             </div>
