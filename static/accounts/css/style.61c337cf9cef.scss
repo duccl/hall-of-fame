@@ -1,0 +1,32 @@
+*,body{
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0F0A1E;
+}
+
+#signUpFormContainer form label{
+    color: white;
+}
+
+.roboto{
+    font-family: 'Roboto',sans-serif;
+}
+
+.color-white{
+    color: white;
+}
+
+.margin-top-md{
+    margin-top: 3em;
+}
+#signUpFormContainer{
+    ul{
+        list-style-type: none;
+    }
+    input[type="file"]{
+        color: white;
+    }
+}
