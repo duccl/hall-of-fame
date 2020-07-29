@@ -21,7 +21,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 SECRET_KEY = os.getenv('DJANGO_KEY')
 YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['glacial-springs-66537.herokuapp.com']
 
